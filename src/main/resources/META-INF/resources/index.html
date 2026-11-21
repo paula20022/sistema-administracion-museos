@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivo Museográfico | Patrimonio y Curaduría</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+
+<div class="editorial-topbar">
+    <span>COLECCIÓN PERMANENTE &bull; CONSERVACIÓN &bull; CURADURÍA</span>
+    <span id="fecha-actual">ARCHIVO CENTRAL</span>
+</div>
+
+
+<header class="museum-header">
+
+    <div class="header-fade-overlay">
+        <div class="header-inner">
+            <div class="emblem">✦</div>
+            <span class="header-pill">ARCHIVO MUSEOGRÁFICO Y PATRIMONIAL</span>
+            <h1 class="main-title">Sistema de Administración de Museos</h1>
+            <p class="subtitle">Organiza, conserva y difunde el patrimonio cultural en un archivo centralizado</p>
+
+
+            <nav class="gallery-nav">
+                <button class="tab-btn active" onclick="cambiarVista('obras', this)">I. Galería de Obras</button>
+                <button class="tab-btn" onclick="cambiarVista('museos', this)">II. Sedes y Salas</button>
+                <button class="tab-btn" onclick="cambiarVista('artistas', this)">III. Artistas y Categorías</button>
+                <button class="tab-btn" onclick="cambiarVista('recorridos', this)">IV. Recorridos e Historial</button>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<section class="arch-showcase">
+    <div class="arch-grid">
+        <div class="arch-card">
+            <span class="arch-roman">I</span>
+            <strong id="count-obras">0</strong>
+            <span class="arch-label">Piezas Catalogadas</span>
+        </div>
+        <div class="arch-card arch-featured">
+            <span class="arch-roman">II</span>
+            <strong id="count-museos">0</strong>
+            <span class="arch-label">Sedes Museísticas</span>
+        </div>
+        <div class="arch-card">
+            <span class="arch-roman">III</span>
+            <strong id="count-artistas">0</strong>
+            <span class="arch-label">Artistas Registrados</span>
+        </div>
+    </div>
+</section>
+
+
+<main class="main-wrapper">
+    <div class="geo-shape geo-arch-left" aria-hidden="true"></div>
+    <div class="geo-shape geo-diamond-right" aria-hidden="true"></div>
+    <div class="geo-shape geo-circle-top" aria-hidden="true"></div>
+
+
+    <section id="vista-obras" class="view-panel active">
+        <div class="section-banner">
+            <div>
+                <span class="kicker">◆ INVENTARIO PATRIMONIAL</span>
+                <h2>Catálogo de Obras y Estado de Conservación</h2>
+            </div>
+            <div class="search-box">
+                <input type="text" id="buscador-obras" placeholder="Buscar obra, artista o sala..." onkeyup="filtrarObras()">
+            </div>
+        </div>
+
+        <div class="curatorial-layout">
+            <aside class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Nueva Ficha de Obra</h3>
+                    <p>Complete los datos de catalogación</p>
+                </div>
+                <form id="form-obra">
+                    <div class="field">
+                        <label>Título de la Pieza *</label>
+                        <input type="text" id="obra-nombre" placeholder="Ej. La Escuela de Atenas" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Reseña Histórica / Técnica</label>
+                        <textarea id="obra-desc" rows="2" placeholder="Óleo sobre lienzo, dimensiones, contexto..."></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>URL de Fotografía de Archivo</label>
+                        <input type="url" id="obra-img" placeholder="https://...">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Conservación (%) *</label>
+                            <input type="number" id="obra-estado" min="0" max="100" value="95" required>
+                        </div>
+                        <div class="field">
+                            <label>Categoría</label>
+                            <select id="obra-categoria"></select>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Artista Autor</label>
+                            <select id="obra-artista"></select>
+                        </div>
+                        <div class="field">
+                            <label>Sala de Exposición</label>
+                            <select id="obra-sala"></select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-royal">Registrar en la Colección</button>
+                </form>
+            </aside>
+
+            <div class="exhibition-wall">
+                <div id="grid-obras" class="frames-grid"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="vista-museos" class="view-panel">
+        <div class="section-banner">
+            <div>
+                <span class="kicker">◆ ARQUITECTURA Y ESPACIOS</span>
+                <h2>Gestión de Museos y Salas de Exposición</h2>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <div class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Registrar Sede Museística</h3>
+                    <p>Ubicación geográfica y portal oficial</p>
+                </div>
+                <form id="form-museo">
+                    <div class="field">
+                        <label>Nombre de la Institución *</label>
+                        <input type="text" id="museo-nombre" placeholder="Ej. Museo Nacional de Arte" required>
+                    </div>
+                    <div class="field">
+                        <label>Descripción Institucional</label>
+                        <textarea id="museo-desc" rows="2"></textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Latitud</label>
+                            <input type="number" step="any" id="museo-lat" placeholder="5.5353">
+                        </div>
+                        <div class="field">
+                            <label>Longitud</label>
+                            <input type="number" step="any" id="museo-lon" placeholder="-73.3678">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Página Principal (URL)</label>
+                        <input type="url" id="museo-url" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="btn-royal">Guardar Museo</button>
+                </form>
+            </div>
+
+            <div class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Crear Sala de Exposición</h3>
+                    <p>Asigne un espacio físico dentro de un museo</p>
+                </div>
+                <form id="form-sala">
+                    <div class="field">
+                        <label>Museo Perteneciente *</label>
+                        <select id="sala-museo" required></select>
+                    </div>
+                    <div class="field">
+                        <label>Nombre de la Sala *</label>
+                        <input type="text" id="sala-nombre" placeholder="Ej. Galería del Barroco" required>
+                    </div>
+                    <div class="field">
+                        <label>Temática o Descripción</label>
+                        <input type="text" id="sala-desc">
+                    </div>
+                    <div class="field">
+                        <label>Aforo Máximo (Visitantes) *</label>
+                        <input type="number" id="sala-capacidad" min="1" value="50" required>
+                    </div>
+                    <button type="submit" class="btn-sepia">Añadir Sala al Museo</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="ledger-card table-wrapper">
+            <h3>Directorio de Museos Activos</h3>
+            <table class="editorial-table">
+                <thead>
+                <tr>
+                    <th>Cód.</th>
+                    <th>Institución</th>
+                    <th>Coordenadas</th>
+                    <th>Portal Web</th>
+                    <th>Gestión</th>
+                </tr>
+                </thead>
+                <tbody id="tabla-museos"></tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section id="vista-artistas" class="view-panel">
+        <div class="section-banner">
+            <div>
+                <span class="kicker">◆ CURADURÍA Y CLASIFICACIÓN</span>
+                <h2>Artistas y Categorías Temáticas</h2>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <div class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Inscribir Artista</h3>
+                    <p>Registro biográfico y origen</p>
+                </div>
+                <form id="form-artista">
+                    <div class="field">
+                        <label>Nombre del Artista *</label>
+                        <input type="text" id="artista-nombre" placeholder="Ej. Rafael Sanzio" required>
+                    </div>
+                    <div class="field">
+                        <label>Nacionalidad</label>
+                        <input type="text" id="artista-nac" placeholder="Ej. Italiana">
+                    </div>
+                    <div class="field">
+                        <label>Nota Biográfica</label>
+                        <textarea id="artista-bio" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn-royal">Registrar Artista</button>
+                </form>
+            </div>
+
+            <div class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Definir Categoría</h3>
+                    <p>Clasificación para búsqueda en archivo</p>
+                </div>
+                <form id="form-categoria">
+                    <div class="field">
+                        <label>Nombre de la Categoría *</label>
+                        <input type="text" id="cat-nombre" placeholder="Ej. Escultura en Mármol" required>
+                    </div>
+                    <div class="field">
+                        <label>Criterio Curatorial</label>
+                        <textarea id="cat-desc" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn-sepia">Guardar Categoría</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="vista-recorridos" class="view-panel">
+        <div class="section-banner">
+            <div>
+                <span class="kicker">◆ DIFUSIÓN Y TRAZABILIDAD</span>
+                <h2>Recorridos Guiados e Historial de Exhibición</h2>
+            </div>
+        </div>
+
+        <div class="curatorial-layout">
+            <aside class="ledger-card">
+                <div class="corner-ornament"></div>
+                <div class="ledger-header">
+                    <h3>Programar Recorrido Guiado</h3>
+                    <p>Rutas temáticas para visitantes</p>
+                </div>
+                <form id="form-recorrido">
+                    <div class="field">
+                        <label>Título del Recorrido *</label>
+                        <input type="text" id="rec-nombre" placeholder="Ej. Ruta del Renacimiento" required>
+                    </div>
+                    <div class="field">
+                        <label>Itinerario y Descripción</label>
+                        <textarea id="rec-desc" rows="3"></textarea>
+                    </div>
+                    <div class="field">
+                        <label>Enlace de Reserva (URL)</label>
+                        <input type="url" id="rec-url" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="btn-royal">Publicar Recorrido</button>
+                </form>
+            </aside>
+
+            <div class="ledger-card table-wrapper">
+                <h3>Bitácora Automática de Exhibición en Salas</h3>
+                <p class="table-note">Cada vez que una obra es asignada a una sala, el sistema registra su trazabilidad histórica.</p>
+                <table class="editorial-table">
+                    <thead>
+                    <tr>
+                        <th>Pieza Exhibida</th>
+                        <th>Sala Asignada</th>
+                        <th>Fecha y Hora de Ingreso</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tabla-historial"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+<div id="modal-ficha" class="modal-backdrop" onclick="cerrarModal(event)">
+    <div class="modal-paper">
+        <button class="modal-close" onclick="cerrarModalDirecto()">✕</button>
+        <div id="modal-contenido"></div>
+    </div>
+</div>
+
+<footer class="museum-footer">
+    <div class="emblem-small">✦</div>
+    <p>Archivo Central de Administración Museística &bull; Quarkus, Hibernate JPA &amp; MySQL, proyecto integrador </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
